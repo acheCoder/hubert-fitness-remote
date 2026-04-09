@@ -8,9 +8,24 @@ export default defineConfig({
     federation({
       name: 'fitness_remote',
       filename: 'remoteEntry.js',
-      exposes: { './FitnessApp': './src/App.tsx' },
+      exposes: {
+        './FitnessApp': './src/App.tsx',
+      },
       shared: ['react', 'react-dom'],
     }),
   ],
-  preview: { port: 5003, strictPort: true }
+  // ESTA PARTE ES CRUCIAL PARA ARREGLAR EL ERROR DE FOR-EACH
+  build: {
+    modulePreload: false,
+    target: 'esnext',
+    minify: false,
+    cssCodeSplit: false, // Fuerza a que todo el CSS vaya junto
+  },
+  preview: {
+    port: 5003,
+    strictPort: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  },
 });
