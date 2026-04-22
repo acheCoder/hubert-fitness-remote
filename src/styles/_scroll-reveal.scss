@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════════════════════════
+   ScrollReveal — Utility classes for on-scroll animations
+   Usage: add class "sr" + optional "sr--delay-N" (1–5)
+   ═══════════════════════════════════════════════════════════ */
+
+.sr {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+
+    /* Cascade: children with .sr inside a visible parent also reveal */
+    .sr {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Cascade delays */
+  &--delay-1 { transition-delay: 0.1s; }
+  &--delay-2 { transition-delay: 0.2s; }
+  &--delay-3 { transition-delay: 0.3s; }
+  &--delay-4 { transition-delay: 0.4s; }
+  &--delay-5 { transition-delay: 0.5s; }
+}

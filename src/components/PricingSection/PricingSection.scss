@@ -1,0 +1,372 @@
+/* ═══════════════════════════════════════════════════════════
+   PricingSection — Planes de precio con anclaje psicológico
+   ═══════════════════════════════════════════════════════════ */
+
+.hf-pricing {
+  padding: var(--hf-section-py) var(--hf-section-px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--hf-accent-glow) 0%, transparent 50%),
+    var(--hf-bg-base);
+
+  /* ── Header ── */
+  &__label {
+    display: inline-block;
+    font-family: var(--hf-font-hero);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--hf-accent);
+    margin-bottom: 0.75rem;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__headline {
+    font-family: var(--hf-font-hero);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--hf-text-main);
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 767px) {
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  /* ── Bloque de autoridad ── */
+  &__why {
+    max-width: 720px;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--hf-text-muted);
+    font-style: italic;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  /* ── Urgencia ── */
+  &__urgency {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 3rem;
+    font-family: var(--hf-font-hero);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.4);
+    border-radius: 100px;
+    padding: 0.4rem 1.2rem;
+    animation: urgency-pulse 2s ease-in-out infinite;
+
+    @media (max-width: 767px) {
+      margin-bottom: 1.5rem;
+      font-size: 0.65rem;
+      padding: 0.3rem 1rem;
+    }
+  }
+
+  @keyframes urgency-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ── Toggle de facturación ── */
+  &__toggle {
+    display: inline-flex;
+    background: var(--hf-bg-surface);
+    border: 1px solid var(--hf-border);
+    border-radius: 50px;
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 3rem;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto 2rem;
+      padding: 0.3rem;
+      border-radius: 50px;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  &__toggle-btn {
+    font-family: var(--hf-font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--hf-text-muted);
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    padding: 0.55rem 1.25rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+
+    &:hover:not(&--active) {
+      color: var(--hf-text-main);
+    }
+
+    &--active {
+      background: var(--hf-accent);
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 2px 12px var(--hf-accent-glow);
+    }
+
+    @media (max-width: 768px) {
+      flex: 0 0 auto;
+      font-size: 0.8rem;
+      padding: 0.6rem 1rem;
+      white-space: nowrap;
+    }
+  }
+
+  @keyframes price-fade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Swipe hint (solo móvil) ── */
+  &__swipe-hint {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--hf-text-muted);
+      margin: 0 auto 0.75rem;
+      opacity: 0.6;
+      animation: swipeHintPulse 2s ease-in-out infinite;
+    }
+  }
+
+  @keyframes swipeHintPulse {
+    0%, 100% { opacity: 0.5; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(3px); }
+  }
+
+  /* ── Grid de tarjetas ── */
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin-inline: auto;
+    align-items: center;
+
+    @media (max-width: 767px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      justify-content: flex-start;
+      gap: 1rem;
+      padding: 1rem 7vw;
+      scroll-padding: 0 7vw;
+      width: 100%;
+      box-sizing: border-box;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  /* ── Card base ── */
+  &__card {
+    position: relative;
+    background: var(--hf-bg-card);
+    background-image: linear-gradient(180deg, #22274D63 0%, #00000000 100%);
+    border: 1px solid var(--hf-border);
+    border-radius: var(--hf-radius-lg);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+    @media (max-width: 767px) {
+      flex: 0 0 72vw;
+      max-width: 300px;
+      scroll-snap-align: center;
+      margin: 0;
+    }
+
+    &:hover {
+      border-color: var(--hf-accent);
+      box-shadow: 0 0 24px var(--hf-accent-glow);
+      transform: translateY(-4px);
+    }
+
+    /* ── Featured / Recomendado ── */
+    &--featured {
+      border-color: var(--hf-accent);
+      box-shadow: 0 0 30px var(--hf-accent-glow), var(--hf-shadow-card);
+
+      @media (max-width: 767px) {
+        order: -1;
+      }
+
+      @media (min-width: 768px) {
+        transform: scale(1.05);
+        z-index: 1;
+
+        &:hover {
+          transform: scale(1.05) translateY(-4px);
+        }
+      }
+    }
+  }
+
+  /* ── Badge RECOMENDADO ── */
+  &__badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--hf-font-hero);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hf-cta-text);
+    background: var(--hf-cta-bg);
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* ── Plan name ── */
+  &__plan-name {
+    font-family: var(--hf-font-hero);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--hf-text-main);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Precio ── */
+  &__price-block {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  &__old-price {
+    font-family: var(--hf-font-hero);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+  }
+
+  &__price {
+    font-family: var(--hf-font-hero);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--hf-accent);
+    line-height: 1;
+    text-shadow: 0 0 20px var(--hf-accent-glow);
+
+    &--animate {
+      animation: price-fade 0.35s ease-out;
+    }
+  }
+
+  &__currency {
+    font-size: 0.5em;
+    opacity: 0.8;
+  }
+
+  &__period {
+    font-size: 0.5em;
+    color: var(--hf-text-muted);
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  /* ── Features list ── */
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    text-align: left;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.92rem;
+      color: var(--hf-text-muted);
+      line-height: 1.4;
+    }
+  }
+
+  &__check {
+    color: var(--hf-neon);
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  /* ── CTA button ── */
+  &__cta {
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    margin-top: auto;
+    font-family: var(--hf-font-hero);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hf-cta-text);
+    background: var(--hf-cta-bg);
+    border: none;
+    border-radius: var(--hf-radius-md);
+    box-shadow: var(--hf-glow-accent);
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: var(--hf-cta-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px var(--hf-accent-glow);
+    }
+  }
+}

@@ -1,0 +1,189 @@
+/* ═══════════════════════════════════════════════════════════════
+   MethodologyApp — app-mockup fondo + panel glassmorphism
+   ═══════════════════════════════════════════════════════════════ */
+
+$mobile: 768px;
+
+.hf-method {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: $mobile) {
+    min-height: auto;
+    overflow: hidden;
+    background: var(--hf-bg-base);
+  }
+
+  /* ── Fondo: app-mockup.svg ── */
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-color: var(--hf-bg-base);
+
+    @media (max-width: $mobile) {
+      display: none;
+    }
+  }
+
+  /* ── Contenedor interno ── */
+  &__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--hf-section-py) var(--hf-section-px);
+
+    @media (max-width: $mobile) {
+      padding: 2rem 1.5rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      box-sizing: border-box;
+      max-width: 100vw;
+    }
+  }
+
+  /* ── Panel Glassmorphism (texto izquierda) ── */
+  &__panel {
+    max-width: 600px;
+    padding: 2.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    border-radius: var(--hf-radius-lg);
+    background: rgba(2, 5, 27, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+    @media (max-width: $mobile) {
+      max-width: 100%;
+      width: 100%;
+      padding: 0;
+      text-align: center;
+      align-items: center;
+      box-sizing: border-box;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      overflow: visible;
+    }
+  }
+
+  /* Etiqueta superior — acento naranja */
+  &__label {
+    font-family: var(--hf-font-body);
+    font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--hf-accent);
+    position: relative;
+    padding-bottom: 0.5rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--hf-accent);
+
+      @media (max-width: $mobile) {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  /* Headline */
+  &__headline {
+    font-family: var(--hf-font-hero);
+    font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--hf-text-main);
+    margin: 0;
+  }
+
+  /* Body */
+  &__body {
+    font-family: var(--hf-font-body);
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--hf-text-muted);
+    margin: 0;
+  }
+
+  /* Lista de beneficios */
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  &__list-item {
+    font-family: var(--hf-font-body);
+    font-size: clamp(0.9rem, 1.3vw, 1rem);
+    line-height: 1.6;
+    color: var(--hf-text-light);
+    padding-left: 1.5rem;
+    position: relative;
+    transition: color 0.3s ease;
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--hf-neon);
+      font-weight: 700;
+    }
+
+    &:hover {
+      color: var(--hf-neon);
+    }
+
+    @media (max-width: $mobile) {
+      text-align: left;
+    }
+  }
+
+  /* ── Imagen mobile (oculta en desktop) ── */
+  &__mobile-img {
+    display: none;
+
+    @media (max-width: $mobile) {
+      display: block;
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      object-fit: contain;
+      margin: 2rem auto 0;
+      border: none;
+      box-shadow: none;
+      outline: none;
+      padding: 0;
+      -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    }
+  }
+}

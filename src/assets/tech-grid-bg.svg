@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none" opacity="0.35">
+  <defs>
+    <!-- Hexagon pattern tile -->
+    <pattern id="hex" x="0" y="0" width="120" height="104" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+      <!-- Row 1 hexagon -->
+      <polygon points="60,2 110,28 110,76 60,102 10,76 10,28" fill="none" stroke="rgba(85,242,243,0.18)" stroke-width="0.8"/>
+      <!-- Row 2 offset hexagon (half visible) -->
+      <polygon points="120,54 170,80 170,128 120,154 70,128 70,80" fill="none" stroke="rgba(85,242,243,0.18)" stroke-width="0.8"/>
+      <polygon points="0,54 50,80 50,128 0,154 -50,128 -50,80" fill="none" stroke="rgba(85,242,243,0.18)" stroke-width="0.8"/>
+    </pattern>
+
+    <!-- Icons as symbols for reuse -->
+    <!-- Heart / Health -->
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="rgba(85,242,243,0.25)" stroke="none"/>
+    </symbol>
+    <!-- DNA -->
+    <symbol id="icon-dna" viewBox="0 0 24 24">
+      <path d="M4 2v2c0 3.87 3.13 7 7 7h2c3.87 0 7 3.13 7 7v2M20 2v2c0 3.87-3.13 7-7 7h-2c-3.87 0-7 3.13-7 7v2M7 7h10M7 17h10" stroke="rgba(89,251,113,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <!-- Dumbbell / Fitness -->
+    <symbol id="icon-dumbbell" viewBox="0 0 24 24">
+      <path d="M6 5v14M18 5v14M4 7h4M4 17h4M16 7h4M16 17h4M6 12h12" stroke="rgba(85,242,243,0.25)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <!-- Brain / Mind -->
+    <symbol id="icon-brain" viewBox="0 0 24 24">
+      <path d="M12 2a5 5 0 0 0-4.78 3.5A4 4 0 0 0 4 9.5a4.5 4.5 0 0 0 1.5 8A3.5 3.5 0 0 0 9 21h6a3.5 3.5 0 0 0 3.5-3.5 4.5 4.5 0 0 0 1.5-8A4 4 0 0 0 16.78 5.5 5 5 0 0 0 12 2z" stroke="rgba(89,251,113,0.25)" stroke-width="1.2" fill="none"/>
+      <path d="M12 2v19" stroke="rgba(89,251,113,0.15)" stroke-width="0.8" stroke-dasharray="2 2"/>
+    </symbol>
+    <!-- Molecule -->
+    <symbol id="icon-molecule" viewBox="0 0 24 24">
+      <circle cx="12" cy="6" r="2.5" stroke="rgba(85,242,243,0.3)" stroke-width="1" fill="none"/>
+      <circle cx="6" cy="18" r="2.5" stroke="rgba(85,242,243,0.3)" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="2.5" stroke="rgba(85,242,243,0.3)" stroke-width="1" fill="none"/>
+      <line x1="12" y1="8.5" x2="7.5" y2="15.8" stroke="rgba(85,242,243,0.2)" stroke-width="1"/>
+      <line x1="12" y1="8.5" x2="16.5" y2="15.8" stroke="rgba(85,242,243,0.2)" stroke-width="1"/>
+      <line x1="8.5" y1="18" x2="15.5" y2="18" stroke="rgba(85,242,243,0.2)" stroke-width="1"/>
+    </symbol>
+    <!-- Lightning / Energy -->
+    <symbol id="icon-bolt" viewBox="0 0 24 24">
+      <path d="M13 2L4 14h7l-2 8 9-12h-7l2-8z" fill="rgba(255,125,74,0.2)" stroke="rgba(255,125,74,0.3)" stroke-width="0.8"/>
+    </symbol>
+    <!-- Moon / Sleep -->
+    <symbol id="icon-moon" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="rgba(85,242,243,0.25)" stroke-width="1.2" fill="none"/>
+    </symbol>
+    <!-- Chart / Progress -->
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <path d="M3 20h18M6 16v4M10 12v8M14 8v12M18 4v16" stroke="rgba(89,251,113,0.25)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+
+  <!-- Background hex grid -->
+  <rect width="800" height="800" fill="url(#hex)"/>
+
+  <!-- Scattered icons -->
+  <use href="#icon-heart" x="80" y="60" width="28" height="28"/>
+  <use href="#icon-dna" x="260" y="40" width="32" height="32"/>
+  <use href="#icon-dumbbell" x="480" y="80" width="30" height="30"/>
+  <use href="#icon-brain" x="650" y="50" width="30" height="30"/>
+
+  <use href="#icon-molecule" x="60" y="220" width="28" height="28"/>
+  <use href="#icon-bolt" x="350" y="200" width="26" height="26"/>
+  <use href="#icon-moon" x="560" y="240" width="28" height="28"/>
+  <use href="#icon-chart" x="720" y="200" width="28" height="28"/>
+
+  <use href="#icon-heart" x="180" y="380" width="26" height="26"/>
+  <use href="#icon-dna" x="440" y="360" width="30" height="30"/>
+  <use href="#icon-dumbbell" x="650" y="400" width="28" height="28"/>
+  <use href="#icon-brain" x="50" y="420" width="28" height="28"/>
+
+  <use href="#icon-molecule" x="300" y="540" width="30" height="30"/>
+  <use href="#icon-bolt" x="520" y="520" width="28" height="28"/>
+  <use href="#icon-moon" x="130" y="560" width="26" height="26"/>
+  <use href="#icon-chart" x="700" y="560" width="28" height="28"/>
+
+  <use href="#icon-heart" x="420" y="700" width="28" height="28"/>
+  <use href="#icon-dna" x="100" y="720" width="30" height="30"/>
+  <use href="#icon-dumbbell" x="600" y="680" width="28" height="28"/>
+  <use href="#icon-brain" x="260" y="700" width="26" height="26"/>
+
+  <!-- Connecting lines (subtle network effect) -->
+  <g stroke="rgba(85,242,243,0.06)" stroke-width="0.5">
+    <line x1="94" y1="74" x2="276" y2="56"/>
+    <line x1="276" y1="56" x2="495" y2="95"/>
+    <line x1="495" y1="95" x2="665" y2="65"/>
+    <line x1="74" y1="234" x2="363" y2="213"/>
+    <line x1="363" y1="213" x2="574" y2="254"/>
+    <line x1="574" y1="254" x2="734" y2="214"/>
+    <line x1="194" y1="393" x2="454" y2="375"/>
+    <line x1="454" y1="375" x2="664" y2="414"/>
+    <line x1="314" y1="554" x2="534" y2="534"/>
+  </g>
+
+  <!-- Subtle glow circles -->
+  <circle cx="400" cy="400" r="300" fill="url(#radGlow)" opacity="0.08"/>
+</svg>

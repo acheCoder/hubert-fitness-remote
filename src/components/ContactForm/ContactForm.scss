@@ -1,0 +1,280 @@
+.hf-contact {
+  padding: var(--hf-section-py) var(--hf-section-px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 100%, var(--hf-neon-glow) 0%, transparent 50%),
+    var(--hf-bg-base);
+
+  @media (max-width: 767px) {
+    position: relative;
+    width: 100%;
+    padding: 4rem 1.5rem;
+    margin-top: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    font-family: var(--hf-font-hero);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--hf-text-main);
+    margin-bottom: 0.75rem;
+
+    @media (max-width: 767px) {
+      font-size: clamp(1.8rem, 8vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.15rem;
+    color: var(--hf-text-muted);
+    margin-bottom: 2.5rem;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* ── Error banner ── */
+  &__error {
+    max-width: 480px;
+    margin: 0 auto 1.5rem;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 67, 62, 0.15);
+    border: 1px solid var(--hf-danger);
+    border-radius: var(--hf-radius-sm);
+  }
+
+  /* ── Form layout ── */
+  &__form {
+    max-width: 480px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      max-width: 100%;
+      gap: 1.5rem;
+    }
+  }
+
+  /* ── Fields ── */
+  &__field {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--hf-text-muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    input, select, textarea {
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      font-family: var(--hf-font-body);
+      color: var(--hf-text-main);
+      background: var(--hf-bg-card);
+      border: 1px solid var(--hf-border);
+      border-radius: var(--hf-radius-sm);
+      outline: none;
+      transition:
+        border-color var(--hf-transition),
+        box-shadow var(--hf-transition);
+
+      @media (max-width: 767px) {
+        min-height: 50px;
+        font-size: 16px !important;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:focus {
+          background-color: rgba(255, 255, 255, 0.08);
+        }
+      }
+
+      &::placeholder {
+        color: var(--hf-text-muted);
+        opacity: 0.5;
+      }
+
+      /* ── Neon focus ── */
+      &:focus {
+        border-color: var(--hf-neon);
+        box-shadow: 0 0 0 3px var(--hf-neon-glow), 0 0 20px var(--hf-neon-glow);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+
+      @media (max-width: 767px) {
+        min-height: 120px;
+      }
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b8faa'><polygon points='0,0 12,0 6,8'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+  }
+
+  /* ── CTA GIGANTE ── */
+  &__submit {
+    position: relative;
+    padding: 1.25rem 2rem;
+    margin-top: 0.75rem;
+    font-family: var(--hf-font-hero);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--hf-cta-text);
+    background: linear-gradient(135deg, #FF7D4A 0%, #ff9b70 100%);
+    border: none;
+    border-radius: var(--hf-radius-md);
+    box-shadow:
+      0 0 30px var(--hf-accent-glow),
+      0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all var(--hf-transition);
+    overflow: hidden;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      min-height: 60px;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+
+    /* Shimmer effect */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.15) 45%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0.15) 55%,
+        transparent 60%
+      );
+      transform: translateX(-100%);
+      animation: shimmerCTA 3s ease-in-out infinite;
+    }
+
+    &:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow:
+        0 0 60px var(--hf-accent-glow),
+        0 8px 25px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(135deg, #ff9b70 0%, #FF7D4A 100%);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(-1px) scale(0.99);
+    }
+
+    &--loading {
+      opacity: 0.7;
+      pointer-events: none;
+
+      &::after {
+        animation: none;
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__privacy {
+    font-size: 0.8rem;
+    color: var(--hf-text-muted);
+    margin-top: 0.5rem;
+  }
+
+  /* ── Success state ── */
+  &--success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+  }
+
+  &__success {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  &__success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--hf-bg-base);
+    background: var(--hf-neon);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 50px var(--hf-neon-glow);
+  }
+
+  &__success-title {
+    font-family: var(--hf-font-hero);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: var(--hf-neon);
+    margin-bottom: 0.75rem;
+  }
+
+  &__success-body {
+    font-size: 1.1rem;
+    color: var(--hf-text-muted);
+    max-width: 450px;
+    line-height: 1.7;
+  }
+}
+
+/* ── Animations ── */
+@keyframes shimmerCTA {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -10,6 +10,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './FitnessApp': './src/App.tsx',
+        './HuberfitApp': './src/pages/Huberfit/HuberfitApp.tsx',
       },
       shared: ['react', 'react-dom'],
     }),

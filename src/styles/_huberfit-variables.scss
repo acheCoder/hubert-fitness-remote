@@ -1,0 +1,64 @@
+/* ═══════════════════════════════════════════════════════════════
+   HUBERFIT — Landing Page Variables
+   Dark Tech Fitness · Regla 60-30-10
+   60% Azul casi negro · 30% Azul oscuro · 10% Cyan + Naranja CTA
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Primary Accent — Cyan (10%) — iconos, checks, métricas ── */
+  --hf-accent: var(--color-accent, #00f0ff);
+  --hf-accent-glow: var(--color-accent-glow, rgba(0, 240, 255, 0.2));
+
+  /* ── Neon Green (secondary highlight) ── */
+  --hf-neon: #09E1C0;
+  --hf-neon-glow: rgba(0, 255, 65, 0.18);
+
+  /* ── Cyan highlights ── */
+  --hf-cyan: #00f0ff;
+  --hf-cyan-glow: rgba(0, 240, 255, 0.15);
+
+  /* ── Danger / Urgency ── */
+  --hf-danger: #FF433E;
+
+  /* ── Dark surfaces (60% azul casi negro) ── */
+  --hf-bg-base: #02051B;
+  --hf-bg-surface: #151c2c;
+  --hf-bg-card: #151c2c;
+  --hf-bg-card-hover: #1c2438;
+
+  /* ── Borders (30% — ultra sutiles) ── */
+  --hf-border: rgba(255, 255, 255, 0.06);
+  --hf-border-accent: rgba(0, 240, 255, 0.25);
+
+  /* ── Typography ── */
+  --hf-text-main: #ffffff;
+  --hf-text-muted: #94a3b8;
+  --hf-text-light: #cbd5e1;
+  --hf-text-warm: #ffffff;
+  --hf-text-accent: var(--hf-accent);
+  --hf-font-hero: var(--font-hero, 'Roboto Slab', serif);
+  --hf-font-body: var(--font-primary, 'Space Grotesk', sans-serif);
+
+  /* ── Spacing scale ── */
+  --hf-section-py: clamp(4rem, 10vh, 8rem);
+  --hf-section-px: var(--content-padding-x, clamp(1rem, 5vw, 6rem));
+
+  /* ── Radius ── */
+  --hf-radius-sm: 8px;
+  --hf-radius-md: 12px;
+  --hf-radius-lg: 20px;
+
+  /* ── Shadows / Glows ── */
+  --hf-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.6);
+  --hf-glow-accent: 0 0 40px var(--hf-accent-glow);
+  --hf-glow-neon: 0 0 40px var(--hf-neon-glow);
+  --hf-glow-cyan: 0 0 40px var(--hf-cyan-glow);
+
+  /* ── CTA Button — Naranja (ESTRICTAMENTE acción/compra) ── */
+  --hf-cta-bg: var(--color-accent-orange, #ff5722);
+  --hf-cta-text: #ffffff;
+  --hf-cta-hover: var(--color-accent-orange-hover, #ff7a50);
+
+  /* ── Transitions ── */
+  --hf-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

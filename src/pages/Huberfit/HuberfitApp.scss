@@ -1,0 +1,199 @@
+@use '../../styles/huberfit-variables';
+@use '../../styles/scroll-reveal';
+
+/* ── Global reset ── */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.huberfit {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--hf-bg-base);
+  color: var(--hf-text-main);
+  font-family: var(--hf-font-body);
+  overflow-x: hidden;
+
+  /* Scroll suave para anchor links del navbar */
+  scroll-behavior: smooth;
+
+  /* ── Override common-submodule variables for Dark Tech theme ── */
+  --font-primary: 'Space Grotesk', sans-serif;
+  --font-hero: 'Roboto Slab', serif;
+  --color-accent: #00f0ff;
+  --color-accent-glow: rgba(0, 240, 255, 0.2);
+  --color-accent-orange: #ff5722;
+  --color-accent-orange-hover: #ff7a50;
+  --color-bg-base: #0b0f19;
+  --color-bg-secondary: #151c2c;
+  --color-surface: #151c2c;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-text-main: #ffffff;
+  --color-text-muted: #94a3b8;
+
+  /* ═══════════════════════════════════════════════
+     Navbar override — pill → full-width glassmorphism
+     ═══════════════════════════════════════════════ */
+
+  /* Container: full-width, top: 0 */
+  .navbar-container {
+    top: 0;
+    justify-content: stretch;
+    padding: 0;
+  }
+
+  /* Pill → full-width bar */
+  .navbar-pill {
+    --pill-bg: rgba(2, 5, 27, 0.82);
+    --pill-text: rgba(241, 246, 253, 0.85);
+    --pill-border: rgba(85, 242, 243, 0.08);
+    --pill-shadow: none;
+
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(85, 242, 243, 0.1);
+    padding: 0.5rem 2rem;
+    justify-content: center;
+    gap: 2rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: none;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      gap: 0.75rem;
+
+      &--open {
+        border-radius: 0;
+      }
+    }
+
+    /* Nav links */
+    .nav-links {
+      align-items: center;
+      gap: 2rem;
+
+      @media (max-width: 768px) {
+        top: 100%;
+        background-color: rgba(2, 5, 27, 0.95);
+        border: none;
+        border-bottom: 1px solid rgba(85, 242, 243, 0.08);
+        border-radius: 0;
+        padding: 0.5rem 1.25rem 1rem;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: none;
+
+        li {
+          border-bottom-color: rgba(255, 255, 255, 0.04);
+        }
+      }
+    }
+
+    /* Nav item — cyan hover glow */
+    .nav-item {
+      font-family: var(--hf-font-body);
+
+      &:hover {
+        opacity: 1;
+        color: #55F2F3;
+        text-shadow: 0 0 14px rgba(85, 242, 243, 0.4);
+      }
+    }
+
+    /* Hide theme toggle — dark only */
+    .theme-toggle-btn {
+      display: none;
+    }
+
+    /* Burger — use our text color */
+    .burger-btn {
+      span {
+        background: var(--pill-text);
+      }
+    }
+
+    /* Lang dropdown */
+    .lang-dropdown {
+      border-left-color: rgba(255, 255, 255, 0.08);
+
+      &__trigger:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        text-shadow: 0 0 10px rgba(85, 242, 243, 0.35);
+      }
+
+      &__menu {
+        background: rgba(2, 5, 27, 0.95);
+        border-color: rgba(85, 242, 243, 0.08);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+      }
+
+      &__item {
+        color: var(--pill-text);
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.06);
+          text-shadow: 0 0 8px rgba(85, 242, 243, 0.25);
+        }
+
+        &--active {
+          color: #55F2F3;
+          background-color: rgba(85, 242, 243, 0.08);
+        }
+      }
+    }
+
+    /* Navbar actions wrapper (from modified TSX) */
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      @media (max-width: 768px) {
+        gap: 0.5rem;
+      }
+    }
+
+    /* Logo */
+    .navbar-logo {
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+      z-index: 2;
+
+      &__img {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 0.85;
+        }
+      }
+
+      @media (max-width: 768px) {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        order: -1;
+
+        .navbar-logo__img {
+          height: 38px;
+        }
+      }
+    }
+  }
+}

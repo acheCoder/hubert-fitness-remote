@@ -1,0 +1,3 @@
+[submodule "src/common-submodule"]
+	path = src/common-submodule
+	url = https://github.com/acheCoder/common-submodule.git
