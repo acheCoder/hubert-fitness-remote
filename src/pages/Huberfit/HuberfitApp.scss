@@ -160,6 +160,32 @@ html, body, #root {
       }
     }
 
+    /* CTA button in navbar */
+    .navbar-cta {
+      display: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      color: #fff;
+      font-family: var(--hf-font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
+      }
+
+      @media (min-width: 769px) {
+        display: inline-block;
+      }
+    }
+
     /* Logo */
     .navbar-logo {
       position: absolute;
@@ -194,6 +220,13 @@ html, body, #root {
           height: 38px;
         }
       }
+    }
+  }
+
+  /* Content padding for floating CTA on mobile */
+  &__content {
+    @media (max-width: 768px) {
+      padding-bottom: 5rem;
     }
   }
 }

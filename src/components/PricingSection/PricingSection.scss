@@ -205,9 +205,10 @@
   /* ── Card base ── */
   &__card {
     position: relative;
-    background: var(--hf-bg-card);
-    background-image: linear-gradient(180deg, #22274D63 0%, #00000000 100%);
-    border: 1px solid var(--hf-border);
+    background: rgba(21, 28, 44, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--hf-radius-lg);
     padding: 2rem 1.5rem;
     display: flex;
@@ -231,8 +232,12 @@
 
     /* ── Featured / Recomendado ── */
     &--featured {
-      border-color: var(--hf-accent);
-      box-shadow: 0 0 30px var(--hf-accent-glow), var(--hf-shadow-card);
+      border-color: rgba(34, 211, 238, 0.3);
+      background: rgba(34, 211, 238, 0.06);
+      box-shadow:
+        0 0 30px var(--hf-accent-glow),
+        var(--hf-shadow-card),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
       @media (max-width: 767px) {
         order: -1;
@@ -265,6 +270,29 @@
     padding: 0.3rem 1rem;
     border-radius: 100px;
     white-space: nowrap;
+
+    &--value {
+      top: auto;
+      bottom: -15px;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      font-size: 0.6rem;
+    }
+  }
+
+  /* ── Scarcity message ── */
+  &__scarcity {
+    font-family: var(--hf-font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #f97316;
+    text-align: center;
+    margin: 0 auto 2rem;
+    letter-spacing: 0.02em;
+
+    @media (max-width: 767px) {
+      font-size: 0.78rem;
+      margin-bottom: 1.25rem;
+    }
   }
 
   /* ── Plan name ── */

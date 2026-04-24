@@ -153,6 +153,14 @@
       transform: translateY(-1px) scale(0.99);
     }
 
+    /* Subtle pulse glow animation */
+    animation: ctaPulse 2.5s ease-in-out infinite;
+
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 30px var(--hf-accent-glow), 0 4px 15px rgba(0, 0, 0, 0.3); }
+      50% { box-shadow: 0 0 50px var(--hf-accent-glow), 0 0 20px rgba(255, 125, 74, 0.35), 0 4px 15px rgba(0, 0, 0, 0.3); }
+    }
+
     @media (max-width: 767px) {
       width: 100%;
       max-width: 320px;

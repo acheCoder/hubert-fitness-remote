@@ -59,6 +59,9 @@ const PricingSection = () => {
       {/* ── Urgencia ── */}
       <span className="hf-pricing__urgency">{t('pricing.urgency_tag')}</span>
 
+      {/* ── Escasez ── */}
+      <p className="hf-pricing__scarcity">{t('pricing.scarcity')}</p>
+
       {/* ── Grid de tarjetas ── */}
       <div className="hf-pricing__grid" ref={gridRef}>
         {PLANS.map((plan) => {
@@ -70,6 +73,9 @@ const PricingSection = () => {
             >
               {isComplete && (
                 <span className="hf-pricing__badge">{t('pricing.recommended')}</span>
+              )}
+              {plan === 'complete' && billing !== 'monthly' && (
+                <span className="hf-pricing__badge hf-pricing__badge--value">{t('pricing.best_value')}</span>
               )}
 
               <h3 className="hf-pricing__plan-name">{t(`pricing.${plan}.name`)}</h3>

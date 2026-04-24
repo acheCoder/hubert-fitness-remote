@@ -1,0 +1,288 @@
+.macro-calc {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  font-family: var(--hf-font-body, 'Space Grotesk', sans-serif);
+
+  &__heading {
+    font-family: var(--hf-font-heading, 'Roboto Slab', serif);
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    margin: 0 0 2rem;
+  }
+
+  /* ── Groups ── */
+  &__group {
+    margin-bottom: 1.75rem;
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--hf-text-muted, #94a3b8);
+    margin-bottom: 0.5rem;
+
+    strong {
+      color: #fff;
+      margin-left: 0.4rem;
+    }
+  }
+
+  /* ── Sex tabs ── */
+  &__tabs {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  &__tab {
+    flex: 1;
+    padding: 0.85rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--hf-text-muted, #94a3b8);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &--active {
+      border-color: #22d3ee;
+      color: #22d3ee;
+      background: rgba(34, 211, 238, 0.08);
+    }
+  }
+
+  /* ── Sliders ── */
+  &__slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22d3ee, #06b6d4);
+      box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22d3ee, #06b6d4);
+      box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+      cursor: pointer;
+    }
+  }
+
+  /* ── Activity grid ── */
+  &__activity-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__activity-btn {
+    flex: 1 1 45%;
+    min-width: 0;
+    padding: 0.75rem 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--hf-text-muted, #94a3b8);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+
+    &--active {
+      border-color: #22d3ee;
+      color: #22d3ee;
+      background: rgba(34, 211, 238, 0.08);
+    }
+
+    &:last-child:nth-child(odd) {
+      flex: 1 1 100%;
+    }
+  }
+
+  /* ── Goal tabs ── */
+  &__tab--goal {
+    font-size: 0.95rem;
+  }
+
+  /* ── Calculate button ── */
+  &__calculate {
+    display: block;
+    width: 100%;
+    padding: 1.1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+    color: #02051b;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(34, 211, 238, 0.35);
+    }
+
+    &--disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+  }
+
+  /* ── Results panel ── */
+  &__results {
+    margin-top: 2rem;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(34, 211, 238, 0.15);
+    backdrop-filter: blur(12px);
+    text-align: center;
+
+    &--visible {
+      animation: macroFadeIn 0.5s ease-out both;
+    }
+  }
+
+  @keyframes macroFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  &__goal-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #22d3ee;
+    margin: 0 0 1rem;
+  }
+
+  &__kcal {
+    margin-bottom: 1.5rem;
+  }
+
+  &__kcal-value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #22d3ee;
+    line-height: 1;
+    display: block;
+  }
+
+  &__kcal-unit {
+    font-size: 0.9rem;
+    color: var(--hf-text-muted, #94a3b8);
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  &__kcal-detail {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--hf-text-muted, #94a3b8);
+    margin-top: 0.35rem;
+    opacity: 0.7;
+  }
+
+  /* ── Macro pills ── */
+  &__macros {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  &__pill {
+    flex: 1;
+    max-width: 110px;
+    padding: 0.75rem 0.5rem;
+    border-radius: 12px;
+    text-align: center;
+
+    &--protein {
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.25);
+    }
+
+    &--carbs {
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.25);
+    }
+
+    &--fat {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+  }
+
+  &__pill-value {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  &__pill-label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--hf-text-muted, #94a3b8);
+    margin-top: 0.2rem;
+  }
+
+  /* ── CTA ── */
+  &__cta {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(249, 115, 22, 0.4);
+    }
+  }
+}

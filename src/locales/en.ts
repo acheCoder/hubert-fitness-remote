@@ -3,17 +3,26 @@ export const en: Record<string, string> = {
   'huberfit.meta.title': 'Huberfit — Personal Training',
 
   /* ── Navbar ── */
+  'nav.home': 'Home',
+  'nav.calculator': 'Calculator',
+  'nav.pricing': 'Pricing',
   'nav.method': 'Method',
   'nav.results': 'Results',
   'nav.coach': 'About me',
   'nav.contact': 'Contact',
+  'nav.cta': 'START NOW',
 
   /* ── Hero Section ── */
-  'hero.headline.1': 'REAL TRANSFORMATION.',
-  'hero.headline.2': 'NO EXCUSES.',
+  'hero.headline.1': 'TRANSFORM YOUR PHYSIQUE.',
+  'hero.headline.2': 'MASTER YOUR DISCIPLINE.',
   'hero.subheadline':
-    'Forget generic plans that don\'t work. I\'m HubertFit, your personal trainer. I give you the exact training and nutrition plan 100% adapted to your life and goals, with constant follow-up on my exclusive App.',
-  'hero.cta': 'HIRE NOW',
+    'Stop wasting time with generic plans. Get your 100% personalized training and nutrition program, with weekly follow-up and direct access to your coach on the exclusive App.',
+  'hero.cta': 'START MY CHANGE NOW',
+
+  /* ── Authority Bar ── */
+  'authority.stat_1': '+100 Lives transformed',
+  'authority.stat_2': '24/7 Support',
+  'authority.stat_3': 'Science-based method',
 
   /* ── About Me ── */
   'aboutme.title': 'WHO I AM',
@@ -54,6 +63,12 @@ export const en: Record<string, string> = {
   'transformations.client_3.name': 'Maria',
   'transformations.client_3.metric': '-5kg in 2 months',
   'transformations.client_3.review': '"The training and diet coaching I received from Hubert has truly made a difference. What I like most is how adaptable it is to my lifestyle. I haven\'t had a fixed schedule and he has managed to adjust the plan to fit perfectly with my days. Flexibility is key, and he has always been willing to make changes according to my needs. Also, his closeness and availability are invaluable. No matter when I need him, he is always there to answer questions or provide support. This level of personalized attention has significantly contributed to my progress and I believe it makes the difference when choosing a trainer. Since I started, I have noticed an improvement in my overall well-being, I have learned to lead a healthy lifestyle, and I have seen progress in my training performance. I would definitely recommend his service to anyone looking for a personalized and effective approach."',
+  'transformations.client_4.name': 'Jose',
+  'transformations.client_4.metric': '-4kg in 3 months',
+  'transformations.client_4.review': '"Thanks to Hubert I managed to lose 4kg of fat in just 3 months without going hungry and enjoying the process. The weekly follow-up and constant adjustments make all the difference."',
+  'transformations.client_5.name': 'Jaime',
+  'transformations.client_5.metric': '+6kg Muscle mass',
+  'transformations.client_5.review': 'First a body recomposition phase was carried out, followed by a muscle mass building phase.',
 
   /* ── About Coach / Authority Closure ── */
   'coach.title': 'Who\'s ',
@@ -104,6 +119,8 @@ export const en: Record<string, string> = {
   'pricing.headline': 'CHOOSE YOUR TRANSFORMATION PLAN',
   'pricing.why_me': 'WHY START WITH ME? I\'m not an algorithm spitting out routines. I\'m the coach who reviews your metrics every week, adjusts your diet if you stall, and pushes you when you want to give up. Your success is my business card.',
   'pricing.urgency_tag': 'LIMITED TIME OFFER',
+  'pricing.scarcity': 'Only 3 spots available this month',
+  'pricing.best_value': 'BEST VALUE',
   'pricing.swipe_hint': 'Swipe to see more plans',
   'pricing.cta': 'Choose Plan',
   'pricing.recommended': 'RECOMMENDED',
@@ -159,4 +176,36 @@ export const en: Record<string, string> = {
   'footer.privacy': 'Privacy',
   'footer.cookies': 'Cookies',
   'footer.terms': 'Terms',
+
+  /* ── Floating CTA ── */
+  'floating_cta.mobile': 'I WANT MY CHANGE!',
+  'floating_cta.desktop': 'Start now',
+
+  /* ── Calculator Page ── */
+  'calc_page.title': 'MACRO CALCULATOR',
+  'calc_page.subtitle': 'Find out how many calories and macronutrients you need per day based on your profile.',
+
+  /* ── Macro Calculator ── */
+  'macro.title': 'Your daily caloric expenditure',
+  'macro.sex': 'Sex',
+  'macro.male': 'Male',
+  'macro.female': 'Female',
+  'macro.weight': 'Weight',
+  'macro.height': 'Height',
+  'macro.age': 'Age',
+  'macro.activity': 'Activity level',
+  'macro.activity_1': 'Sedentary',
+  'macro.activity_2': 'Light',
+  'macro.activity_3': 'Moderate',
+  'macro.activity_4': 'Active',
+  'macro.activity_5': 'Very active',
+  'macro.day': 'day',
+  'macro.protein': 'Protein',
+  'macro.carbs': 'Carbs',
+  'macro.fat': 'Fat',
+  'macro.goal': 'Goal',
+  'macro.goal_cut': 'Lose Fat',
+  'macro.goal_bulk': 'Build Muscle',
+  'macro.calculate': 'CALCULATE',
+  'macro.cta': 'DESIGN MY PERSONALIZED PLAN',
 };

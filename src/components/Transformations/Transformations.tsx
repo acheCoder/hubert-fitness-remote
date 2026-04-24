@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useI18n } from '../../common-submodule/src/i18n/I18nContext';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import cambio1 from '../../assets/img-cambios/cambio1.jpg';
@@ -7,6 +7,10 @@ import cambio3 from '../../assets/img-cambios/cambio3.jpg';
 import cambio4 from '../../assets/img-cambios/cambio4.jpg';
 import cambio5 from '../../assets/img-cambios/cambio5.png';
 import cambio6 from '../../assets/img-cambios/cambio6.png';
+import cambio7 from '../../assets/img-cambios/cambio7.png';
+import cambio8 from '../../assets/img-cambios/cambio8.png';
+import cambio9 from '../../assets/img-cambios/cambio9.jpg';
+import cambio10 from '../../assets/img-cambios/cambio10.jpg';
 import './Transformations.scss';
 
 /* ─── Data estática (las imágenes no cambian con el idioma) ─── */
@@ -14,24 +18,50 @@ const CLIENT_IMAGES = [
   { before: cambio1, after: cambio2 },
   { before: cambio3, after: cambio4 },
   { before: cambio5, after: cambio6 },
+  { before: cambio7, after: cambio8 },
+  { before: cambio9, after: cambio10 },
 ];
 
 const CLIENT_COUNT = CLIENT_IMAGES.length;
 
 const REVIEW_MAX_LENGTH = 200;
+const AUTO_SCROLL_INTERVAL = 4000; // ms entre cada avance
 
 const Transformations = () => {
   const { t } = useI18n();
   const trackRef = useRef<HTMLDivElement>(null);
   const headerRef = useScrollReveal<HTMLElement>();
   const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+  const pausedRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const scroll = (dir: 1 | -1) => {
+  const scrollOne = useCallback((dir: 1 | -1) => {
     if (!trackRef.current) return;
     const card = trackRef.current.querySelector<HTMLElement>('.hf-tf__card');
-    const distance = card ? card.offsetWidth + 32 : 380; // 32 ≈ gap
+    const distance = card ? card.offsetWidth + 32 : 380;
     trackRef.current.scrollBy({ left: dir * distance, behavior: 'smooth' });
-  };
+  }, []);
+
+  const scrollNext = useCallback(() => {
+    if (!trackRef.current || pausedRef.current) return;
+    const el = trackRef.current;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10;
+    if (atEnd) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      scrollOne(1);
+    }
+  }, [scrollOne]);
+
+  /* Auto-scroll */
+  useEffect(() => {
+    timerRef.current = setInterval(scrollNext, AUTO_SCROLL_INTERVAL);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [scrollNext]);
+
+  /* Pausar al interactuar */
+  const pause = () => { pausedRef.current = true; };
+  const resume = () => { pausedRef.current = false; };
 
   return (
     <section className="hf-tf sr" id="huberfit-results" ref={headerRef}>
@@ -41,10 +71,16 @@ const Transformations = () => {
       <p className="hf-tf__subheadline">{t('transformations.subheadline')}</p>
 
       {/* ── Carousel wrapper ── */}
-      <div className="hf-tf__carousel">
+      <div
+        className="hf-tf__carousel"
+        onMouseEnter={pause}
+        onMouseLeave={resume}
+        onTouchStart={pause}
+        onTouchEnd={resume}
+      >
         <button
           className="hf-tf__arrow hf-tf__arrow--left"
-          onClick={() => scroll(-1)}
+          onClick={() => scrollOne(-1)}
           aria-label="Previous"
           type="button"
         >
@@ -102,7 +138,7 @@ const Transformations = () => {
 
         <button
           className="hf-tf__arrow hf-tf__arrow--right"
-          onClick={() => scroll(1)}
+          onClick={() => scrollOne(1)}
           aria-label="Next"
           type="button"
         >

@@ -1,0 +1,25 @@
+.calc-page {
+  min-height: 100vh;
+  padding-top: 5rem;
+
+  &__hero {
+    text-align: center;
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  &__title {
+    font-family: var(--hf-font-heading, 'Roboto Slab', serif);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: #fff;
+    margin: 0 0 0.75rem;
+  }
+
+  &__subtitle {
+    font-family: var(--hf-font-body, 'Space Grotesk', sans-serif);
+    font-size: 1.05rem;
+    color: var(--hf-text-muted, #94a3b8);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
