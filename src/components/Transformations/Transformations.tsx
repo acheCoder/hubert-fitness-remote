@@ -59,6 +59,29 @@ const Transformations = () => {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [scrollNext]);
 
+  /* Volver al inicio cuando el usuario llega al final manualmente */
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let resetTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const handleScroll = () => {
+      if (resetTimer) clearTimeout(resetTimer);
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10;
+      if (atEnd) {
+        resetTimer = setTimeout(() => {
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        }, 1500);
+      }
+    };
+
+    el.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      el.removeEventListener('scroll', handleScroll);
+      if (resetTimer) clearTimeout(resetTimer);
+    };
+  }, []);
+
   /* Pausar al interactuar */
   const pause = () => { pausedRef.current = true; };
   const resume = () => { pausedRef.current = false; };

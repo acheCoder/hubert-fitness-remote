@@ -4,6 +4,7 @@ import { useI18n } from '../../common-submodule/src/i18n/I18nContext';
 import Navbar from '../../common-submodule/src/components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import FloatingCTA from '../../components/FloatingCTA/FloatingCTA';
+import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
 import { huberfitTranslations } from '../../locales';
 import logoImg from '../../assets/logo.png';
 
@@ -41,6 +42,20 @@ const Layout = () => {
     { label: t('nav.contact'), href: '/#huberfit-contact' },
   ];
 
+  /* Scroll al tope al hacer clic en el link "Inicio" (delegación de eventos) */
+  useEffect(() => {
+    const handleNavClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>('a.nav-item[href="/"]');
+      if (!anchor) return;
+      if (pathname === '/') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    document.addEventListener('click', handleNavClick);
+    return () => document.removeEventListener('click', handleNavClick);
+  }, [pathname]);
+
   return (
     <div className="huberfit">
       <Navbar
@@ -56,6 +71,7 @@ const Layout = () => {
       </div>
 
       <FloatingCTA />
+      <ScrollToTop />
       <Footer />
     </div>
   );

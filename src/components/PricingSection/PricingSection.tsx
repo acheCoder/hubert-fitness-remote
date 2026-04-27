@@ -16,11 +16,12 @@ const PricingSection = () => {
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
-    if (!mq.matches || !gridRef.current) return;
-    const featured = gridRef.current.querySelector('.hf-pricing__card--featured');
+    const grid = gridRef.current;
+    if (!mq.matches || !grid) return;
+    const featured = grid.querySelector<HTMLElement>('.hf-pricing__card--featured');
     if (featured) {
       requestAnimationFrame(() => {
-        featured.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+        grid.scrollLeft = featured.offsetLeft - (grid.offsetWidth - featured.offsetWidth) / 2;
       });
     }
   }, []);
