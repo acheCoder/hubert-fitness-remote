@@ -33,6 +33,12 @@
     box-shadow: 0 -6px 28px rgba(249, 115, 22, 0.5);
   }
 
+  &--hidden {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
   /* ── Desktop: pill esquina inferior-derecha ── */
   @media (min-width: 769px) {
     width: auto;

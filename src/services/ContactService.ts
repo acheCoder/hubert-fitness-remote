@@ -10,6 +10,8 @@ export interface ContactPayload {
   phone: string;
   goal: string;
   message: string;
+  subject?: string;
+  from_name?: string;
 }
 
 export interface ContactResponse {
@@ -46,9 +48,13 @@ export const sendContactForm = async (data: ContactPayload): Promise<ContactResp
 
   const body = {
     access_key: WEB3FORMS_ACCESS_KEY,
-    subject: `[Huberfit] Nuevo lead: ${data.name}`,
-    from_name: data.name,
-    ...data,
+    subject: data.subject ?? `[Huberfit] Nuevo lead: ${data.name}`,
+    from_name: data.from_name ?? data.name,
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    goal: data.goal,
+    message: data.message,
   };
 
   const res = await fetch(WEB3FORMS_ENDPOINT, {

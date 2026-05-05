@@ -37,9 +37,8 @@ const Layout = () => {
 
   const navLinks = [
     { label: t('nav.home'), href: '/' },
-    { label: t('nav.calculator'), href: '/calculadora' },
     { label: t('nav.pricing'), href: '/#huberfit-pricing' },
-    { label: t('nav.contact'), href: '/#huberfit-contact' },
+    { label: t('nav.calculator'), href: '/calculadora' },
   ];
 
   /* Scroll al tope al hacer clic en el link "Inicio" (delegación de eventos) */

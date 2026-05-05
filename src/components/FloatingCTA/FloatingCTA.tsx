@@ -1,11 +1,24 @@
+import { useState, useEffect } from 'react';
 import { useI18n } from '../../common-submodule/src/i18n/I18nContext';
 import './FloatingCTA.scss';
 
 const FloatingCTA = () => {
   const { t } = useI18n();
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    const target = document.getElementById('huberfit-contact');
+    if (!target) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setHidden(entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <a href="/#huberfit-contact" className="floating-cta">
+    <a href="/#huberfit-contact" className={`floating-cta${hidden ? ' floating-cta--hidden' : ''}`}>
       <span className="floating-cta__text floating-cta__text--mobile">
         {t('floating_cta.mobile')}
       </span>
