@@ -21,7 +21,7 @@ const slideVariants = {
   exit: (dir: 1 | -1) => ({ x: dir * -50, opacity: 0 }),
 };
 
-const transition = { duration: 0.35, ease: [0.4, 0, 0.2, 1] };
+const transition = { duration: 0.35, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
 
 const QualificationFunnel = () => {
   const { t } = useI18n();

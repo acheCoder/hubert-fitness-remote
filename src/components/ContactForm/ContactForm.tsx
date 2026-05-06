@@ -92,7 +92,7 @@ const ContactForm = ({ onSubmit }: ContactFormProps) => {
   const [selectedPlan, setSelectedPlan] = useState<SelectablePlan | null>(null);
   const [showAllOffers, setShowAllOffers] = useState(false);
   const [expandedBilling, setExpandedBilling] = useState<BillingPeriod>('monthly');
-  const formRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [highlightForm, setHighlightForm] = useState(false);
 
   /* ── Navegación ── */
