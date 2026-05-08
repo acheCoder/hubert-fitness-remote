@@ -1,4 +1,4 @@
-import Groq from 'groq-sdk';
+import Groq from 'groq-sdk'; 
 import { HUBERT_KNOWLEDGE_BASE } from './knowledgeBase';
 
 interface ChatRequestBody {
