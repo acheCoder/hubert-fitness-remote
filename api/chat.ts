@@ -1,6 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import Groq from 'groq-sdk';
-import { HUBERT_KNOWLEDGE_BASE } from './knowledgeBase';
+import { HUBERT_KNOWLEDGE_BASE } from './knowledgeBase.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS
@@ -32,29 +31,47 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const groq = new Groq({ apiKey });
-
-    const messages: Groq.Chat.ChatCompletionMessageParam[] = [
+    const messages = [
       { role: 'system', content: HUBERT_KNOWLEDGE_BASE },
       ...history.slice(-10).map((m: { role: string; content: string }) => ({
-        role: m.role as 'user' | 'assistant',
+        role: m.role,
         content: m.content,
       })),
       { role: 'user', content: message },
     ];
 
-    const chatCompletion = await groq.chat.completions.create({
-      messages,
-      model: 'llama-3.3-70b-versatile',
-      temperature: 0.2,
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages,
+        temperature: 0.2,
+      }),
     });
 
-    const reply = chatCompletion.choices[0]?.message?.content || '';
+    if (!response.ok) {
+      const errData = await response.text();
+      console.error('Groq API error:', response.status, errData);
+      return res.status(200).json({
+        success: true,
+        reply: 'Lo siento, ha ocurrido un error. Inténtalo de nuevo.',
+      });
+    }
+
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || '';
 
     return res.status(200).json({ success: true, reply });
   } catch (error: unknown) {
     const errMsg = error instanceof Error ? error.message : 'Unknown error';
     console.error('Groq API error:', errMsg);
-    return res.status(500).json({ success: false, error: errMsg });
+    return res.status(200).json({
+      success: true,
+      reply: 'Lo siento, ha ocurrido un error. Inténtalo de nuevo.',
+    });
   }
 }
