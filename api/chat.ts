@@ -24,7 +24,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ success: false, error: 'GROQ_API_KEY not configured' });
+    console.error('CRITICAL ERROR: GROQ_API_KEY is missing in Vercel environment.');
+    return res.status(200).json({
+      success: true,
+      reply: 'Lo siento, el servicio de IA no está disponible en este momento. Por favor, contacta directamente con Hubert.',
+    });
   }
 
   try {
