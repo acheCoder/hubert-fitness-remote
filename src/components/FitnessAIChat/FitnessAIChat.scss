@@ -1,0 +1,335 @@
+/* ══════════════════════════════════════════════
+   FitnessAIChat – HubertFit Dark Premium Theme
+   ══════════════════════════════════════════════ */
+
+$chat-bg: #0a0a0a;
+$chat-surface: #1a1a1a;
+$chat-border: #2a2a2a;
+$chat-text: #f0f0f0;
+$chat-text-muted: #a0a0a0;
+$chat-accent: #ff914d;
+$chat-radius: 12px;
+$chat-bubble-radius: 16px;
+
+/* ── Floating widget wrapper ── */
+.hf-chat-widget {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+
+  @media (max-width: 767px) {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  &__toggle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: $chat-accent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba($chat-accent, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba($chat-accent, 0.5);
+    }
+
+    &--open {
+      background: $chat-surface;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+}
+
+.hf-chat {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: 520px;
+  background: $chat-bg;
+  border: 1px solid $chat-border;
+  border-radius: $chat-radius;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  animation: chat-slide-up 0.25s ease-out;
+
+  @media (max-width: 767px) {
+    width: calc(100vw - 2rem);
+    height: 70vh;
+    max-height: 520px;
+  }
+
+  /* ── Header ── */
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.25rem;
+    background: $chat-surface;
+    border-bottom: 1px solid $chat-border;
+  }
+
+  &__header-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  &__header-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $chat-text;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Messages container ── */
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    /* Custom scrollbar */
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $chat-border;
+      border-radius: 10px;
+
+      &:hover {
+        background: #3a3a3a;
+      }
+    }
+  }
+
+  /* ── Bubbles ── */
+  &__bubble {
+    max-width: 80%;
+    padding: 0.7rem 1rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    animation: bubble-in 0.25s ease-out;
+
+    &--user {
+      align-self: flex-end;
+      background: $chat-accent;
+      color: #fff;
+      font-weight: 500;
+      border-radius: $chat-bubble-radius $chat-bubble-radius 4px $chat-bubble-radius;
+    }
+
+    &--assistant {
+      align-self: flex-start;
+      background: $chat-surface;
+      color: $chat-text;
+      border-radius: $chat-bubble-radius $chat-bubble-radius $chat-bubble-radius 4px;
+      border: 1px solid $chat-border;
+    }
+
+    &--loading {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.85rem 1.25rem;
+    }
+  }
+
+  /* ── Loading dots ── */
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $chat-accent;
+    animation: bounce-dot 1.2s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+
+  /* ── Footer / Input area ── */
+  &__footer {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid $chat-border;
+    background: $chat-surface;
+  }
+
+  &__input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    color: $chat-text;
+    background: #111;
+    border: 1px solid $chat-border;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: $chat-text-muted;
+      opacity: 0.6;
+    }
+
+    &:focus {
+      border-color: $chat-accent;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  &__send {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: transparent;
+    border: 1px solid $chat-border;
+    border-radius: 8px;
+    color: $chat-accent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: rgba($chat-accent, 0.1);
+      border-color: $chat-accent;
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+  }
+
+  /* ── Email fallback form ── */
+  &__email-form {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__email-input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    color: $chat-text;
+    background: #111;
+    border: 1px solid $chat-border;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: $chat-text-muted;
+      opacity: 0.6;
+    }
+
+    &:focus {
+      border-color: $chat-accent;
+    }
+  }
+
+  &__email-btn {
+    padding: 0.7rem 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    background: $chat-accent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.1s ease;
+
+    &:hover {
+      background: darken($chat-accent, 6%);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
+
+/* ── Animations ── */
+@keyframes bounce-dot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chat-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

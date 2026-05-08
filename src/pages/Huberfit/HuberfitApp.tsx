@@ -7,6 +7,7 @@ import Transformations from '../../components/Transformations/Transformations';
 import AboutCoach from '../../components/AboutCoach/AboutCoach';
 import PricingSection from '../../components/PricingSection/PricingSection';
 import ContactForm from '../../components/ContactForm/ContactForm';
+import FitnessAIChat from '../../components/FitnessAIChat/FitnessAIChat';
 
 const HuberfitApp = () => (
   <>
@@ -19,6 +20,7 @@ const HuberfitApp = () => (
     <AboutCoach />
     <PricingSection />
     <ContactForm />
+    <FitnessAIChat />
   </>
 );
 

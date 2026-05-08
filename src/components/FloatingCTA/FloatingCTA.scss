@@ -39,31 +39,8 @@
     pointer-events: none;
   }
 
-  /* ── Desktop: pill esquina inferior-derecha ── */
+  /* ── Desktop: ocultar (el chat bot cumple esta función) ── */
   @media (min-width: 769px) {
-    width: auto;
-    bottom: 2rem;
-    right: 2rem;
-    left: auto;
-    border-radius: 50px;
-    padding: 0.85rem 1.6rem;
-    font-size: 0.85rem;
-    gap: 0.5rem;
-    box-shadow: 0 8px 32px rgba(249, 115, 22, 0.3);
-
-    &__text--mobile {
-      display: none;
-    }
-
-    &__text--desktop {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(249, 115, 22, 0.45);
-    }
+    display: none;
   }
 }
