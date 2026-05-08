@@ -1,20 +1,22 @@
-import Groq from 'groq-sdk'; 
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+import Groq from 'groq-sdk';
 import { HUBERT_KNOWLEDGE_BASE } from './knowledgeBase';
 
-interface ChatRequestBody {
-  message: string;
-  history?: { role: 'user' | 'assistant'; content: string }[];
-}
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-export default async function handler(
-  req: { method: string; body: ChatRequestBody },
-  res: { status: (code: number) => { json: (data: unknown) => void } },
-) {
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
 
-  const { message, history = [] } = req.body;
+  const { message, history = [] } = req.body ?? {};
 
   if (!message || typeof message !== 'string') {
     return res.status(400).json({ success: false, error: 'Message is required' });
@@ -30,7 +32,7 @@ export default async function handler(
 
     const messages: Groq.Chat.ChatCompletionMessageParam[] = [
       { role: 'system', content: HUBERT_KNOWLEDGE_BASE },
-      ...history.slice(-10).map((m) => ({
+      ...history.slice(-10).map((m: { role: string; content: string }) => ({
         role: m.role as 'user' | 'assistant',
         content: m.content,
       })),
