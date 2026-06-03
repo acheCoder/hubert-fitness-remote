@@ -27,11 +27,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const { name, email, phone, goal, message } = req.body as ContactPayload;
 
-  // Validar campos requeridos
-  if (!name || !email || !phone || !goal || !message) {
+  console.log('[Contact API] Received:', { name, email, phone, goal, message });
+
+  // Validar campos requeridos (al menos email y message)
+  if (!email || !message) {
+    console.log('[Contact API] Missing required fields:', { email, message });
     return res.status(400).json({
       success: false,
-      message: 'All fields are required',
+      message: 'Email and message are required',
     });
   }
 
@@ -43,10 +46,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       subject: `[Huberfit] Nuevo lead: ${name}`,
       html: `
         <h2>Nuevo contacto desde Huberfit</h2>
-        <p><strong>Nombre:</strong> ${name}</p>
+        ${name ? `<p><strong>Nombre:</strong> ${name}</p>` : ''}
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Teléfono:</strong> ${phone}</p>
-        <p><strong>Objetivo:</strong> ${goal}</p>
+        ${phone ? `<p><strong>Teléfono:</strong> ${phone}</p>` : ''}
+        ${goal ? `<p><strong>Objetivo:</strong> ${goal}</p>` : ''}
         <p><strong>Mensaje:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
       `,
