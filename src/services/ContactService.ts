@@ -20,56 +20,58 @@ export interface ContactResponse {
 }
 
 /**
- * API key de Web3Forms. En producción se inyecta via env var.
- * Genera la tuya gratis en https://web3forms.com
+ * Endpoint serverless en Vercel para enviar correos con Resend
  */
-const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? '';
+const CONTACT_ENDPOINT = '/api/contact';
 
 /**
- * Simula el envío en desarrollo (2s de delay).
+ * Mock para desarrollo local (simula envío)
  */
-const simulateSend = async (_data: ContactPayload): Promise<ContactResponse> => {
+const simulateSend = async (data: ContactPayload): Promise<ContactResponse> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({ success: true, message: 'Simulated OK' });
-    }, 2000);
+      console.log('[ContactService] Mock: Email enviado a infohubertfit@gmail.com', data);
+      resolve({ success: true, message: 'Email simulado (desarrollo)' });
+    }, 1500);
   });
 };
 
 /**
- * Envía el formulario de contacto a Web3Forms.
+ * Envía el formulario de contacto a través de Vercel Functions + Resend.
  */
 export const sendContactForm = async (data: ContactPayload): Promise<ContactResponse> => {
-  if (!WEB3FORMS_ACCESS_KEY) {
-    console.info('[ContactService] No API key — simulando envío:', data);
+  // En desarrollo, usa mock
+  if (import.meta.env.DEV) {
     return simulateSend(data);
   }
 
-  const body = {
-    access_key: WEB3FORMS_ACCESS_KEY,
-    subject: data.subject ?? `[Huberfit] Nuevo lead: ${data.name}`,
-    from_name: data.from_name ?? data.name,
-    name: data.name,
-    email: data.email,
-    phone: data.phone,
-    goal: data.goal,
-    message: data.message,
-  };
+  try {
+    const res = await fetch(CONTACT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        goal: data.goal,
+        message: data.message,
+      }),
+    });
 
-  const res = await fetch(WEB3FORMS_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(body),
-  });
+    if (!res.ok) {
+      return { success: false, message: `HTTP ${res.status}` };
+    }
 
-  if (!res.ok) {
-    return { success: false, message: `HTTP ${res.status}` };
+    const json = await res.json();
+    return {
+      success: json.success === true,
+      message: json.message ?? 'Email sent successfully',
+    };
+  } catch (error) {
+    console.error('[ContactService] Error:', error);
+    return {
+      success: false,
+      message: 'Error sending email',
+    };
   }
-
-  const json = await res.json();
-  return {
-    success: json.success === true,
-    message: json.message ?? 'Unknown',
-  };
 };
