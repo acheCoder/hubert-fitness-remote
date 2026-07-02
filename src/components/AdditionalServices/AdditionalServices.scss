@@ -1,0 +1,285 @@
+/* ═══════════════════════════════════════════════════════════
+   AdditionalServices — Servicios adicionales / Fisioterapia
+   ═══════════════════════════════════════════════════════════ */
+.hf-additional-services {
+  padding: var(--hf-section-py) var(--hf-section-px);
+  background:
+    radial-gradient(ellipse at top, rgba(255, 145, 77, 0.16), transparent 42%),
+    var(--hf-bg-base);
+
+  &__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__label {
+    display: inline-block;
+    font-family: var(--hf-font-hero);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--hf-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-family: var(--hf-font-hero);
+    font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    font-weight: 800;
+    color: var(--hf-text-main);
+    margin: 0 0 2rem;
+  }
+
+  &__card {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+    background: rgba(21, 28, 44, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--hf-radius-lg);
+    box-shadow: var(--hf-shadow-card);
+    overflow: hidden;
+    padding: 1.25rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      padding: 2rem;
+    }
+  }
+
+  &__media {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border-radius: calc(var(--hf-radius-lg) - 0.2rem);
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.04);
+    aspect-ratio: 3 / 4;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    gap: 1.2rem;
+  }
+
+  &__heading {
+    font-family: var(--hf-font-hero);
+    font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+    font-weight: 700;
+    color: var(--hf-text-main);
+    margin: 0;
+  }
+
+  &__description {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--hf-text-muted);
+  }
+
+  &__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  &__benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--hf-text-main);
+    font-weight: 500;
+  }
+
+  &__benefit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 999px;
+    background: rgba(255, 145, 77, 0.16);
+    color: var(--hf-accent);
+    flex-shrink: 0;
+  }
+
+  /* Selector de Modalidades (Online / Presencial) */
+  &__modes {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.3rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    width: fit-content;
+  }
+
+  &__mode-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: var(--hf-text-muted);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    svg {
+      opacity: 0.7;
+    }
+
+    &:hover {
+      color: var(--hf-text-main);
+    }
+
+    &.is-active {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--hf-accent);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+      svg {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  &__price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.95rem;
+  }
+
+  &__price-label {
+    color: var(--hf-text-muted);
+  }
+
+  &__price-value {
+    font-weight: 700;
+    color: var(--hf-text-main);
+  }
+
+  &__pricing-notice {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--hf-text-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 0.6rem;
+    font-style: italic;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.9rem 1.5rem;
+    border-radius: 999px;
+    background: var(--hf-accent);
+    color: #111;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-self: flex-start;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 145, 77, 0.25);
+    }
+  }
+
+  /* ── Ajustes de Pantalla Móvil ── */
+  @media (max-width: 767px) {
+    padding: var(--hf-section-py) 1rem calc(var(--hf-section-py) + 4rem);
+
+    &__card {
+      padding: 1.25rem;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    &__media {
+      min-height: auto;
+      max-height: 360px;
+      aspect-ratio: 3 / 4;
+
+      img {
+        object-position: center 15%;
+      }
+    }
+
+    &__content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center; // Fuerza el centrado horizontal de todos los elementos hijos en el eje flex
+      width: 100%;
+    }
+
+    &__benefit-item {
+      justify-content: center;
+    }
+
+    &__modes {
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__pricing {
+      width: 100%; // Garantiza que la caja de tarifas ocupe todo el ancho disponible simétricamente
+      box-sizing: border-box;
+    }
+
+    &__price-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__cta {
+      display: inline-flex; // Mantiene el centrado interno de su texto e icono
+      align-items: center;
+      justify-content: center;
+      width: 100%; // Expande el botón cyan a lo ancho de la tarjeta para máxima usabilidad móvil
+      box-sizing: border-box;
+      align-self: center; // Garantiza que se posicione centrado respecto a su contenedor flex
+      padding: 1rem;
+    }
+  }
+}

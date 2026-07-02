@@ -37,6 +37,7 @@ const Layout = () => {
 
   const navLinks = [
     { label: t('nav.home'), href: '/' },
+    { label: t('nav.services.physio'), href: '/servicios/fisioterapia' },
     { label: t('nav.pricing'), href: '/#huberfit-pricing' },
     { label: t('nav.calculator'), href: '/calculadora' },
   ];

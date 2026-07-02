@@ -24,17 +24,17 @@ const TIMEFRAMES: Timeframe[] = ['2_weeks', '3_months', '6_months'];
 
 /* ── Configuración de precios (planes principales del funnel) ── */
 const CORE_PLAN_CONFIG: Record<string, { totalPrice: number; months: number; monthlyEquiv: number; nameKey: string }> = {
-  complete_semiannual: { totalPrice: 360, months: 6, monthlyEquiv: 60, nameKey: 'intake.prescription.complete_semiannual.name' },
-  complete_quarterly: { totalPrice: 190, months: 3, monthlyEquiv: 63, nameKey: 'intake.prescription.complete_quarterly.name' },
-  complete_monthly: { totalPrice: 75, months: 1, monthlyEquiv: 75, nameKey: 'pricing.complete.name' },
-  nutrition_monthly: { totalPrice: 45, months: 1, monthlyEquiv: 45, nameKey: 'pricing.nutrition.name' },
-  nutrition_quarterly: { totalPrice: 115, months: 3, monthlyEquiv: 38, nameKey: 'pricing.nutrition.name' },
-  nutrition_semiannual: { totalPrice: 215, months: 6, monthlyEquiv: 36, nameKey: 'pricing.nutrition.name' },
-  training_monthly: { totalPrice: 45, months: 1, monthlyEquiv: 45, nameKey: 'pricing.training.name' },
-  training_quarterly: { totalPrice: 115, months: 3, monthlyEquiv: 38, nameKey: 'pricing.training.name' },
-  training_semiannual: { totalPrice: 215, months: 6, monthlyEquiv: 36, nameKey: 'pricing.training.name' },
+  complete_semiannual: { totalPrice: 240, months: 6, monthlyEquiv: 40, nameKey: 'intake.prescription.complete_semiannual.name' },
+  complete_quarterly: { totalPrice: 125, months: 3, monthlyEquiv: 42, nameKey: 'intake.prescription.complete_quarterly.name' },
+  complete_monthly: { totalPrice: 50, months: 1, monthlyEquiv: 50, nameKey: 'pricing.complete.name' },
+  nutrition_monthly: { totalPrice: 30, months: 1, monthlyEquiv: 30, nameKey: 'pricing.nutrition.name' },
+  nutrition_quarterly: { totalPrice: 75, months: 3, monthlyEquiv: 25, nameKey: 'pricing.nutrition.name' },
+  nutrition_semiannual: { totalPrice: 145, months: 6, monthlyEquiv: 24, nameKey: 'pricing.nutrition.name' },
+  training_monthly: { totalPrice: 30, months: 1, monthlyEquiv: 30, nameKey: 'pricing.training.name' },
+  training_quarterly: { totalPrice: 75, months: 3, monthlyEquiv: 25, nameKey: 'pricing.training.name' },
+  training_semiannual: { totalPrice: 145, months: 6, monthlyEquiv: 24, nameKey: 'pricing.training.name' },
 };
-const ANCHOR_MONTHLY = 75;
+const ANCHOR_MONTHLY = 50;
 const FEAT_COUNT = 4;
 const CATALOG_PLANS: PlanBase[] = ['nutrition', 'training', 'complete'];
 const BILLING_PERIODS: BillingPeriod[] = ['monthly', 'quarterly', 'semiannual'];
