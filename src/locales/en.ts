@@ -173,6 +173,7 @@ export const en: Record<string, string> = {
   /* ── Additional Services ── */
   'nav.services': 'Services',
   'nav.services.physio': 'Physiotherapy',
+  'services.label': 'PHYSIOTHERAPY & SPORTS RECOVERY SERVICES',
   'services.title': 'HIGH-PERFORMANCE SERVICES',
   'services.physio.image_alt': 'HubertFit physiotherapy',
   'services.physio.headline': 'Sports Physiotherapy & Recovery',
