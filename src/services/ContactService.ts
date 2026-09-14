@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    ContactService — Servicio serverless para formulario Huberfit.
-   Usa Web3Forms como proveedor externo.
+   Usa Resend (vía la función serverless /api/contact) como proveedor externo.
    En desarrollo: simula la petición con un delay.
    ═══════════════════════════════════════════════════════════════ */
 
@@ -55,6 +55,8 @@ export const sendContactForm = async (data: ContactPayload): Promise<ContactResp
         phone: data.phone,
         goal: data.goal,
         message: data.message,
+        subject: data.subject,
+        from_name: data.from_name,
       }),
     });
 

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback, type FormEvent } from 'react';
 import { Send, MessageCircle, X } from 'lucide-react';
+import { sendContactForm } from '../../services/ContactService';
 import './FitnessAIChat.scss';
 
 type Message = { role: 'user' | 'assistant'; content: string };
@@ -17,6 +18,7 @@ const FitnessAIChat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAskingEmail, setIsAskingEmail] = useState(false);
   const [email, setEmail] = useState('');
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,13 +69,46 @@ const FitnessAIChat = () => {
 
   const handleEmailSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
-    setMessages((prev) => [
-      ...prev,
-      { role: 'assistant', content: `¡Perfecto! He anotado tu email (${email}). Hubert se pondrá en contacto contigo pronto. 💪` },
-    ]);
-    setIsAskingEmail(false);
-    setEmail('');
+    if (!email.trim() || isSendingEmail) return;
+
+    setIsSendingEmail(true);
+
+    const transcript = messages
+      .map((m) => `${m.role === 'user' ? 'Usuario' : 'Asistente'}: ${m.content}`)
+      .join('\n');
+
+    try {
+      const response = await sendContactForm({
+        name: '',
+        email,
+        phone: '',
+        goal: '',
+        message: `Contacto solicitado desde el chat IA de Huberfit.\n\n--- Conversación ---\n${transcript}`,
+        subject: `[Huberfit Chat IA] Nuevo contacto de ${email}`,
+        from_name: 'HubertFit Chat IA',
+      });
+
+      if (response.success) {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: `¡Perfecto! He anotado tu email (${email}). Hubert se pondrá en contacto contigo pronto. 💪` },
+        ]);
+        setIsAskingEmail(false);
+        setEmail('');
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: 'Lo siento, no he podido enviar tu contacto. Inténtalo de nuevo en unos segundos.' },
+        ]);
+      }
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: 'Lo siento, ha ocurrido un error enviando tu contacto. Inténtalo de nuevo.' },
+      ]);
+    } finally {
+      setIsSendingEmail(false);
+    }
   };
 
   return (
@@ -143,10 +178,11 @@ const FitnessAIChat = () => {
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled={isSendingEmail}
                   required
                 />
-                <button type="submit" className="hf-chat__email-btn">
-                  Enviar a Hubert
+                <button type="submit" className="hf-chat__email-btn" disabled={isSendingEmail}>
+                  {isSendingEmail ? 'Enviando...' : 'Enviar a Hubert'}
                 </button>
               </form>
             )}

@@ -115,15 +115,39 @@ const ContactForm = ({ onSubmit }: ContactFormProps) => {
     }
   }, [step]);
 
-  /* ── Puerta lógica + Prescripción ── */
+  /* ── Escucha la selección de plan disparada desde PricingSection (u otros bloques) ── */
+  useEffect(() => {
+    const handleSelectPlan = (e: Event) => {
+      const planId = (e as CustomEvent<string>).detail;
+      if (!planId || !CORE_PLAN_CONFIG[planId]) return;
+
+      const billingMatch = BILLING_PERIODS.find((period) => planId.endsWith(`_${period}`));
+      const billing = billingMatch ?? 'monthly';
+      const prescribed = `complete_${billing}` as PrescribedPlan;
+
+      setPrescribedPlan(prescribed);
+      setSelectedPlan(planId as SelectablePlan);
+      setExpandedBilling(billing);
+      setShowAllOffers(planId !== prescribed);
+      goTo(2);
+    };
+
+    window.addEventListener('select-plan', handleSelectPlan);
+    return () => window.removeEventListener('select-plan', handleSelectPlan);
+  }, [goTo]);
+
+  /* ── Prescripción (todo perfil llega al paso 2; sin rechazo) ── */
   const evaluate = useCallback(() => {
-    if (formData.trainingDays === '1-2' || formData.timeframe === '2_weeks') {
-      goTo(-1);
-      return;
-    }
     const actual = parseFloat(formData.pesoActual) || 0;
     const objetivo = parseFloat(formData.pesoObjetivo) || 0;
-    const recommended = calculateRecommendedPlan(formData.objective, actual, objetivo);
+
+    // Disponibilidad baja o expectativas muy cortas: en vez de bloquear el acceso,
+    // se ofrece el plan de menor compromiso (mensual, sin permanencia).
+    const isLightProfile = formData.trainingDays === '1-2' || formData.timeframe === '2_weeks';
+    const recommended = isLightProfile
+      ? 'complete_monthly'
+      : calculateRecommendedPlan(formData.objective, actual, objetivo);
+
     setPrescribedPlan(recommended);
     setSelectedPlan(recommended);
     goTo(2);
@@ -192,9 +216,11 @@ const ContactForm = ({ onSubmit }: ContactFormProps) => {
   }, [formData, selectedPlan, t, goTo, onSubmit, scrollToForm]);
 
   /* ── Helpers ── */
-  const isStep1Complete =
-    formData.objective && formData.trainingDays && formData.timeframe &&
-    formData.pesoActual.trim() && formData.pesoObjetivo.trim();
+  // El peso es orientativo para la recomendación, pero nunca bloquea el avance:
+  // solo las 3 preguntas (objetivo, días, expectativa) son obligatorias.
+  const isStep1Complete = Boolean(
+    formData.objective && formData.trainingDays && formData.timeframe
+  );
   const isLoading = status === 'loading';
 
   /* ── Datos de prescripción ── */
@@ -363,36 +389,6 @@ const ContactForm = ({ onSubmit }: ContactFormProps) => {
             </motion.div>
           )}
 
-          {/* ═══════ RECHAZO (step === -1) ═══════ */}
-          {step === -1 && (
-            <motion.div
-              key="rejected"
-              className="hf-contact__step"
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={transition}
-            >
-              <div className="hf-contact__result hf-contact__result--rejected">
-                <span className="hf-contact__result-icon">✗</span>
-                <h2 className="hf-contact__result-title">{t('intake.rejected.title')}</h2>
-                <p className="hf-contact__result-body">{t('intake.rejected.body')}</p>
-                <button
-                  type="button"
-                  className="hf-contact__back"
-                  onClick={() => {
-                    setFormData({ objective: null, trainingDays: null, timeframe: null, pesoActual: '', pesoObjetivo: '', name: '', email: '' });
-                    goTo(0, -1);
-                  }}
-                >
-                  {t('intake.rejected.retry')}
-                </button>
-              </div>
-            </motion.div>
-          )}
-
           {/* ═══════ PASO 2 — Selección de plan + Datos + Envío ═══════ */}
           {step === 2 && prescribedPlan && planConfig && (
             <motion.div
@@ -419,7 +415,7 @@ const ContactForm = ({ onSubmit }: ContactFormProps) => {
                     aria-checked={selectedPlan === 'complete_monthly'}
                     tabIndex={0}
                     onClick={() => setSelectedPlan('complete_monthly')}
-                    onKeyDown={(e) => e.key === 'Enter' && setSelectedPlan('complete_monthly')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedPlan('complete_monthly'); } }}
                   >
                     <h3 className="hf-contact__pricing-plan">{t('intake.anchor.name')}</h3>
                     <div className="hf-contact__pricing-price-block">
@@ -450,7 +446,7 @@ const ContactForm = ({ onSubmit }: ContactFormProps) => {
                   aria-checked={selectedPlan === prescribedPlan}
                   tabIndex={0}
                   onClick={() => setSelectedPlan(prescribedPlan)}
-                  onKeyDown={(e) => e.key === 'Enter' && setSelectedPlan(prescribedPlan)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedPlan(prescribedPlan); } }}
                 >
                   <span className="hf-contact__pricing-badge">
                     {t(`intake.prescription.badge.${formData.objective || 'health'}`).replace('{kg}', String(Math.round(weightDiff)))}
@@ -541,7 +537,7 @@ const ContactForm = ({ onSubmit }: ContactFormProps) => {
                             aria-checked={selectedPlan === planId}
                             tabIndex={0}
                             onClick={() => setSelectedPlan(planId)}
-                            onKeyDown={(e) => e.key === 'Enter' && setSelectedPlan(planId)}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedPlan(planId); } }}
                           >
                             <h3 className="hf-contact__pricing-plan">{t(`pricing.${planBase}.name`)}</h3>
                             <div className="hf-contact__pricing-price-block">

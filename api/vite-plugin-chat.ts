@@ -7,6 +7,22 @@ interface ChatBody {
   history?: { role: 'user' | 'assistant'; content: string }[];
 }
 
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 20;
+const MAX_MESSAGE_LENGTH = 2000;
+const requestLog = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = requestLog.get(ip);
+  if (!entry || now > entry.resetAt) {
+    requestLog.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT_MAX;
+}
+
 export function chatApiPlugin(): Plugin {
   return {
     name: 'chat-api',
@@ -45,6 +61,19 @@ export function chatApiPlugin(): Plugin {
         if (!message || typeof message !== 'string') {
           res.statusCode = 400;
           res.end(JSON.stringify({ success: false, error: 'Message is required' }));
+          return;
+        }
+
+        if (message.length > MAX_MESSAGE_LENGTH) {
+          res.statusCode = 400;
+          res.end(JSON.stringify({ success: false, error: 'Message is too long' }));
+          return;
+        }
+
+        const ip = (req.socket?.remoteAddress as string) || 'unknown';
+        if (isRateLimited(ip)) {
+          res.statusCode = 429;
+          res.end(JSON.stringify({ success: false, error: 'Too many requests, please try again later.' }));
           return;
         }
 
