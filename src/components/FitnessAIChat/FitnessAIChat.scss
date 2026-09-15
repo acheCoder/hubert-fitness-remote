@@ -2,6 +2,8 @@
    FitnessAIChat – HubertFit Dark Premium Theme
    ══════════════════════════════════════════════ */
 
+@use "sass:color";
+
 $chat-bg: #0a0a0a;
 $chat-surface: #1a1a1a;
 $chat-border: #2a2a2a;
@@ -284,7 +286,7 @@ $chat-bubble-radius: 16px;
     transition: background 0.2s ease, transform 0.1s ease;
 
     &:hover {
-      background: darken($chat-accent, 6%);
+      background: color.adjust($chat-accent, $lightness: -6%);
     }
 
     &:active {
